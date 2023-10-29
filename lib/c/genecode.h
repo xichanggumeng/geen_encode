@@ -11,7 +11,7 @@ int const GENE_C = 2;
 int const GENE_G = 3;
 
 char *gene_encode(char *str) {
-    char *ptr = str, *result;
+    char *ptr = str, *result = malloc(1);
     int result_length = 0;
     while (*ptr != '\0') {
         char n = *ptr;
@@ -42,7 +42,7 @@ char *gene_encode(char *str) {
 }
 
 char *gene_decode(char *str) {
-    char *ptr = str, *result;
+    char *ptr = str, *result = malloc(1);
     int result_length = 0;
     int t = 0, n = 0;
     while (*ptr != '\0') {
