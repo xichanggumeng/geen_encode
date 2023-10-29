@@ -6,7 +6,7 @@ const app = express();
 const port = 80;
 
 const path = 'lib/c/main.exe';
-//const path = 'lib/c/main';
+// const path = 'lib/c/main';
 
 app.use(bodyParser.urlencoded({extended: false}));
 
