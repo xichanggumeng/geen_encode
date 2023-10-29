@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Gene Code</title>
+
+    <style>
+        /* 样式用于布局 */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        textarea {
+            width: 280px;
+            height: 300px;
+            padding: 10px;
+            margin: 10px;
+
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <label>
+        <textarea id="input" rows="4" cols="50"></textarea>
+    </label>
+    <div class="button-container">
+        <button id="encode">基因编码</button>
+        <button id="decode">基因解码</button>
+    </div>
+</div>
+<script type="module">
+    let input = document.getElementById('input');
+    document.getElementById('encode').addEventListener('click', () => {
+        let string = input.value;
+        if (string === '') {
+            return;
+        }
+        api('encode', string);
+    });
+    document.getElementById('decode').addEventListener('click', () => {
+        let string = input.value;
+        if (string === '') {
+            return;
+        }
+        api('decode', string);
+    });
+
+    function api(type, s) {
+        fetch('/' + type, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded', // 设置请求头
+            },
+            body: 's=' + encodeURIComponent(s)
+        }).then(response => response.text())
+            .then(data => {
+                console.log(data);
+                let s = data.toString();
+                if (s !== '') {
+                    input.value = s;
+                }
+            });
+    }
+</script>
+</body>
+</html>
